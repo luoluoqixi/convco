@@ -235,10 +235,11 @@ impl CommitParserBuilder {
         let regex_first_line = Regex::new(
             r"(?xms)
         ^
-        (?P<type>[a-zA-Z]+)
+        (?P<type>\p{So}|\p{Sm}|\p{Sc}|[a-zA-Z]+)
         (?:\((?P<scope>[^()\r\n]+)\))?
         (?P<breaking>!)?
-        :\x20(?P<desc>[^\r\n]+)
+        [:\x20]
+        (?P<desc>[^\r\n]+)
         $",
         )
         .expect("valid scope regex");
