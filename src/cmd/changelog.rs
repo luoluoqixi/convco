@@ -201,7 +201,11 @@ impl<'a> ChangeLogTransformer<'a> {
                     short_hash,
                     references,
                 };
-                if let Some(section) = self.group_types.get(conv_commit.r#type.as_str()) {
+                let t = conv_commit.r#type.as_str();
+                let t_normal = crate::utils::normalize_type(t);
+                if let Some(section) = self.group_types.get(t) {
+                    commits.entry(section).or_default().push(commit_context)
+                } else if let Some(section) = self.group_types.get(t_normal.as_str()) {
                     commits.entry(section).or_default().push(commit_context)
                 }
             }

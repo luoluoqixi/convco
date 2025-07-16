@@ -5,6 +5,7 @@ mod error;
 mod git;
 mod semver;
 mod strip;
+mod utils;
 
 use std::{path::PathBuf, process::exit};
 
